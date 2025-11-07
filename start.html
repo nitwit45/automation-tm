@@ -1,0 +1,1194 @@
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            transition: opacity ease-in 0.2s;
+        }
+
+        body[unresolved] {
+            opacity: 0;
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
+
+    <meta name="csrf-token" content="OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TASK MONITOR</title>
+    <link rel="shortcut icon" href="https://dtm.payable.lk/plugins/images/fav_time.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600"> -->
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/tooplate.css">
+
+    <!-- <link rel="stylesheet" href="https://preview.colorlib.com/theme/bootstrap/css-table-13/css/owl.carousel.min.css">
+    
+         -->
+
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/other/datatables/dataTables.bootstrap4.css">
+    <!-- <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/other/datatables/select.dataTables.min.css"> -->
+
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-xl navbar-light bg-light">
+                        <a class="navbar-brand " href="#">
+                            <!-- <i class="fas fa-3x fa-tachometer-alt tm-site-icon"></i> -->
+                            <img src="https://dtm.payable.lk/plugins/images/logo-mini.svg" class="brand-logo-mini"
+                                style="width: calc(90px - 30px);
+      max-width: 100%;" alt="logo"></a>
+                        <h2 class="tm-site-title mb-0"><span style="color:#0c75c9 ;">TASK</span> <span
+                                style="color:#9e9e9e ;"> MONITOR</span></h2>
+
+                        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mx-auto">
+
+                                <li class="nav-item">
+                                    <a class="nav-link " href="https://dtm.payable.lk/home">Home
+                                        <span class="sr-only"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item  active">
+                                    <a class="nav-link" href="https://dtm.payable.lk/task">Start Task</a>
+                                </li>
+
+                                <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle  OR  " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://dtm.payable.lk/report-by-staff">Detailed Report 1</a>
+                                <a class="dropdown-item" href="https://dtm.payable.lk/report-by-projects">Detailed Report 2</a>
+                            </div>
+                        </li> -->
+
+                                <!-- <li class="nav-item">
+                            <a class="nav-link" href="accounts.html">Accounts</a>
+                        </li> -->
+                                <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Settings
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Billing</a>
+                                <a class="dropdown-item" href="#">Customize</a>
+                            </div>
+                        </li> -->
+                            </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex" href="https://dtm.payable.lk/logout">
+                                        <i class="far fa-user mr-2 tm-logout-icon"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <style>
+                /* .form-control[readonly] {
+                                            background-color: #54657d;
+                                            opacity: 1;
+                                        } */
+                #taskType-error {
+                    color: #ff0000;
+                }
+
+                #bugId-error {
+                    color: #ff0000;
+                }
+
+                #project-error {
+                    color: #ff0000;
+                }
+
+                #task-error {
+                    color: #ff0000;
+                }
+
+                #dtime-error {
+                    color: #ff0000;
+                }
+
+                /* .error{
+                                            color: #ff0000;
+                                            margin-bottom: 7px;
+                                        } */
+            </style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <link rel="stylesheet" href="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.css">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.css">
+
+            <div class="row tm-mt-big">
+                <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12">
+                    <div class="bg-white tm-block">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="tm-block-title d-inline-block">Start New Task</h2>
+                            </div>
+                        </div>
+                        <div class="row mt-12 tm-edit-product-row">
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                <script src="https://dtm.payable.lk/plugins/js/sweetalert.min.js"></script>
+
+                                <form method="POST" action="https://dtm.payable.lk/user-save" accept-charset="UTF-8"
+                                    novalidate="novalidate" id="activity_status" class="tm-edit-product-form"
+                                    enctype="multipart/form-data"><input name="_token" type="hidden"
+                                        value="OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt">
+                                    <input type="hidden" name="_token" value="OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3"><label for="name" class="col-form-label">Task Type
+                                                    <span class="redstar">*</span></label></div>
+                                            <div class="col-lg-9">
+                                                <select class="custom-select valid" name="taskType" id="taskType"
+                                                    aria-invalid="false">
+
+                                                    <option value="" selected="selected">Select</option>
+                                                    <option value="0451ce18-7968-11ef-876b-000c294719a8">Automation
+                                                        Script Updating</option>
+                                                    <option value="044b8b35-7968-11ef-876b-000c294719a8">Automation
+                                                        Script Writing</option>
+                                                    <option value="f99fb3c8-da1a-11ee-be37-000c294719a8">Bug Fixing
+                                                    </option>
+                                                    <option value="f9a0eaea-da1a-11ee-be37-000c294719a8">Bug
+                                                        Verifications</option>
+                                                    <option value="f9a3793c-da1a-11ee-be37-000c294719a8">Certification
+                                                    </option>
+                                                    <option value="f9a6470f-da1a-11ee-be37-000c294719a8">Daily Process
+                                                    </option>
+                                                    <option value="f9a90956-da1a-11ee-be37-000c294719a8">Development
+                                                    </option>
+                                                    <option value="f9aa5ed6-da1a-11ee-be37-000c294719a8">DevOps</option>
+                                                    <option value="f9abb493-da1a-11ee-be37-000c294719a8">
+                                                        Discussion-External</option>
+                                                    <option value="f9ad09f7-da1a-11ee-be37-000c294719a8">
+                                                        Discussion-Internal</option>
+                                                    <option value="f9aeed9c-da1a-11ee-be37-000c294719a8">Document Review
+                                                    </option>
+                                                    <option value="f9b2093c-da1a-11ee-be37-000c294719a8">Documentation
+                                                    </option>
+                                                    <option value="f9b34b45-da1a-11ee-be37-000c294719a8">Env Setup
+                                                    </option>
+                                                    <option value="f9b36bef-da1a-11ee-be37-000c294719a8">Planning
+                                                    </option>
+                                                    <option value="f9b4af6f-da1a-11ee-be37-000c294719a8">Research
+                                                    </option>
+                                                    <option value="f9b4ed44-da1a-11ee-be37-000c294719a8">Self Learning
+                                                    </option>
+                                                    <option value="f9b62f6f-da1a-11ee-be37-000c294719a8">
+                                                        Support-External</option>
+                                                    <option value="f9b806e2-da1a-11ee-be37-000c294719a8">
+                                                        Support-Internal</option>
+                                                    <option value="f9baccd5-da1a-11ee-be37-000c294719a8">Test Cases
+                                                        Writing</option>
+                                                    <option value="f9b94a75-da1a-11ee-be37-000c294719a8">
+                                                        Testing-Automation</option>
+                                                    <option value="f9b96f82-da1a-11ee-be37-000c294719a8">Testing-Manual
+                                                    </option>
+                                                    <option value="f9bab21e-da1a-11ee-be37-000c294719a8">Training
+                                                    </option>
+                                                    <option value="00000000-0000-0000-0000-000000000000">Undefined
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="taskTypeText" id="taskTypeText" value="Development">
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3"><label for="name" class="col-form-label">Project <span
+                                                        class="redstar">*</span></label></div>
+                                            <div class="col-lg-9">
+                                                <select class="custom-select valid" name="project" id="project"
+                                                    aria-invalid="false">
+
+                                                    <option value="" selected="selected">Select</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e111">BOC WPOS Mini
+                                                    </option>
+                                                    <option value="d81f7aa7-79a3-11f0-abdd-000c291f19c4">CG Village
+                                                        Banking</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e112">COMM mPOS
+                                                    </option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e113">COMM QPlus
+                                                    </option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e114">COMM SoftPOS
+                                                    </option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e115">COMM WPOS
+                                                    </option>
+                                                    <option value="b558dc79-ef31-11ed-ba7c-005056ab8181">Daily Task
+                                                        Monitor</option>
+                                                    <option value="0e1f3d5d-3e86-11ef-b1de-000c294719a8">elogic</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e116">General
+                                                    </option>
+                                                    <option value="3d15016b-98ca-11ee-93d2-000c294719a8">HNB-SoftPos
+                                                    </option>
+                                                    <option value="2dd627bb-f585-11ef-9461-000c294719a8">HNB-SOLO
+                                                    </option>
+                                                    <option value="3c8c9db3-98ca-11ee-93d2-000c294719a8">HNB-WPOS
+                                                    </option>
+                                                    <option value="fe3373ed-7967-11ef-876b-000c294719a8">IPG -
+                                                        Automation</option>
+                                                    <option value="b87f1c7d-2718-11ef-960f-000c294719a8">IPG - React
+                                                        Native SDK</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e118">IPG - Sprint 5
+                                                        - Link Payment</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e119">IPG - Sprint 6
+                                                        - PAY NOW Link</option>
+                                                    <option value="049d8fbb-e32d-11ed-a327-005056ab8181">IPG - Sprint 7
+                                                        - Multi Currency and Bank with Amex</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e120">IPG Daily
+                                                        Process</option>
+                                                    <option value="22b23d58-2168-11ef-960f-000c294719a8">IPG Sprint 8 -
+                                                        Flutter SDK</option>
+                                                    <option value="22fe00fc-2168-11ef-960f-000c294719a8">IPG Sprint 9 -
+                                                        Tokenization</option>
+                                                    <option value="1a345cd4-faae-11ed-ba7c-005056ab8181">Licensing
+                                                        Management</option>
+                                                    <option value="1a6bde8d-faae-11ed-ba7c-005056ab8181">
+                                                        LoA_documentation</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e121">mPOS Corporate
+                                                        Portal</option>
+                                                    <option value="e0de4864-c59d-11ee-b370-000c294719a8">Network Team
+                                                    </option>
+                                                    <option value="8854eff2-f7ec-11ef-9461-000c294719a8">NGX</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e122">NTB </option>
+                                                    <option value="21bbd174-3370-11ef-960f-000c294719a8">Pay Now App
+                                                        v2.0</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e123">PAYable
+                                                        Billable</option>
+                                                    <option value="95c86b42-de04-11ef-84d3-000c294719a8">PayLink Wallet
+                                                        - Zambia</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e124">PEO mPOS
+                                                    </option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e125">PEO SoftPOS
+                                                    </option>
+                                                    <option value="37894d6b-507e-11ef-b808-000c294719a8">PropTech
+                                                    </option>
+                                                    <option value="14b1ef48-0b7a-11ef-960f-000c294719a8">Reporting
+                                                    </option>
+                                                    <option value="91136937-fc72-11ee-be37-000c294719a8">Sales DTM
+                                                    </option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e126">SAMPATH mPOS
+                                                    </option>
+                                                    <option value="ef5ecdc7-cbf6-11ef-bc56-000c294719a8">SettleIn -
+                                                        Automation</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e127">SEYLAN mPOS
+                                                    </option>
+                                                    <option value="9189aaf6-f0ad-11ee-be37-000c294719a8">SMS API - HNB
+                                                    </option>
+                                                    <option value="d91bfcd3-d45f-11ee-8d0d-000c294719a8">SMS API - Hutch
+                                                    </option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e128">SoftPOS
+                                                        Corporate Portal</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e117">Technical
+                                                        Support - IPG</option>
+                                                    <option value="02939130-10a5-4ee9-92e4-9233f6e1e129">Technical
+                                                        Support - POS</option>
+                                                    <option value="1a988276-faae-11ed-ba7c-005056ab8181">Vehicle Parking
+                                                        System</option>
+                                                    <option value="149520b3-0b7a-11ef-960f-000c294719a8">We Care
+                                                    </option>
+                                                    <option value="ae24aeca-d480-11ee-8d0d-000c294719a8">Webportal Own
+                                                        APIs</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <label for="category" class="col-form-label">Category</label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <select class="custom-select valid" name="category" id="category"
+                                                    aria-invalid="false">
+
+                                                    <option value="" selected="selected">Select</option>
+                                                    <option value="37dae769-507e-11ef-b808-000c294719a8">API</option>
+                                                    <option value="37c0d4e9-507e-11ef-b808-000c294719a8">Mobile App
+                                                    </option>
+                                                    <option value="37e0b067-507e-11ef-b808-000c294719a8">Portal</option>
+                                                    <option value="37a9da76-507e-11ef-b808-000c294719a8">Property
+                                                        Manager Portal</option>
+                                                    <option value="378f7d22-507e-11ef-b808-000c294719a8">Property Master
+                                                        Portal</option>
+                                                    <option value="37ea41bf-507e-11ef-b808-000c294719a8">QA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <label for="category" class="col-form-label">Activity</label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <select class="custom-select" name="activity" id="activity">
+
+                                                    <option value="" selected="selected">Select</option>
+                                                    <option value="37c7b027-507e-11ef-b808-000c294719a8">Bug fixing
+                                                    </option>
+                                                    <option value="37d2d20a-507e-11ef-b808-000c294719a8">Bug Reporting
+                                                    </option>
+                                                    <option value="37cffd5a-507e-11ef-b808-000c294719a8">Bug
+                                                        verification</option>
+                                                    <option value="37c63d52-507e-11ef-b808-000c294719a8">Deployment
+                                                    </option>
+                                                    <option value="37c4e3e4-507e-11ef-b808-000c294719a8">Dev Testing
+                                                    </option>
+                                                    <option value="37c38772-507e-11ef-b808-000c294719a8">Development
+                                                    </option>
+                                                    <option value="37ce9555-507e-11ef-b808-000c294719a8">Document Review
+                                                        or Read</option>
+                                                    <option value="37c22cdf-507e-11ef-b808-000c294719a8">Env Setup
+                                                    </option>
+                                                    <option value="37d16cde-507e-11ef-b808-000c294719a8">Live testing
+                                                    </option>
+                                                    <option value="37d976a4-507e-11ef-b808-000c294719a8">performance
+                                                        Testing</option>
+                                                    <option value="37d582c9-507e-11ef-b808-000c294719a8">Regresstion
+                                                        testing</option>
+                                                    <option value="37dabbe4-507e-11ef-b808-000c294719a8">Requesting
+                                                        Releases</option>
+                                                    <option value="37d42c8f-507e-11ef-b808-000c294719a8">Smoke Testing
+                                                    </option>
+                                                    <option value="37ca6ad5-507e-11ef-b808-000c294719a8">Test Case
+                                                        review</option>
+                                                    <option value="37c90b9d-507e-11ef-b808-000c294719a8">Test Case
+                                                        Writing</option>
+                                                    <option value="37cbc501-507e-11ef-b808-000c294719a8">Testing -manual
+                                                    </option>
+                                                    <option value="37cd2cb2-507e-11ef-b808-000c294719a8">Testing-
+                                                        Automation</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="bug-id-section" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <label for="bugId" class="col-form-label">Bug Id <span
+                                                        class="redstar">*</span></label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <input type="text" class="form-control validate"
+                                                    placeholder="Enter Bug IDs (e.g., 1229,1222,1211)" value=""
+                                                    name="bugId" id="bugId">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <label for="description" class="col-form-label">Task <span
+                                                        class="redstar">*</span></label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <textarea id="task" name="task" class="form-control validate " rows="3"
+                                                    required=""></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <label for="expire_date" class=" col-form-label">Date <span
+                                                        class="redstar">*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <input id="dtime" name="dtime" type="text" class="form-control validate"
+                                                    data-large-mode="true">
+                                                <label id="error_for_date" class="mt-2 text-danger"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <label for="expire_date" class=" col-form-label">Time <span
+                                                        class="redstar">*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <input id="dtime_only" name="dtime_only" type="text"
+                                                    class="form-control validate ui-timepicker-input"
+                                                    data-large-mode="true" autocomplete="off">
+                                                <label id="error_for_time" class="mt-2 text-danger"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
+                                            <button type="submit" id="start-task" class="btn btn-primary">
+                                                Start
+                                            </button>
+                                            <a onclick="cancelConfirmation(event)" class="btn btn-primary"
+                                                href="https://dtm.payable.lk/home">Cancel</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="row tm-mt-small">
+                <div class="col-12 font-weight-light">
+                    <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+                        Copyright © 2024. Created by
+                        <a href="http://www.payable.lk" class="text-white tm-footer-link">PAYable</a> | IT
+                        <small>(v1.3.3L)</small>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script src="https://dtm.payable.lk/plugins/js/jquery-3.3.1.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/moment.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/utils.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/Chart.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/fullcalendar.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/bootstrap.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/tooplate-scripts.js"></script>
+
+    <script src="https://dtm.payable.lk/plugins/js/other/datatables/jquery.dataTables.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- <script src="https://dtm.payable.lk/plugins/js/other/datatables/dataTables.select.min.js"></script> -->
+
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/jquery.validate.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/bootstrap-maxlength.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/form-validation.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/bt-maxLength.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="https://dtm.payable.lk/plugins/js/sweetalert.min.js"></script>
+
+    <script>
+        // $(document).ready(function() {
+        //     var tid = setInterval(chk_my_auth, 2000);
+        //     function chk_my_auth() {
+        //         $.ajax({
+        //             "type": "GET",
+        //             "url": "https://dtm.payable.lk/checkSessionLive",
+        //             "dataType": "JSON",
+        //             cache: false,
+        //             success: function(results) {
+        //                 // console.log(results.success)
+        //                 if (results.success) {
+        //                     console.log('true')
+        //                 } else {
+        //                     console.log('logout')
+        //                     window.location.href = "https://dtm.payable.lk/logoutSessionOut";
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
+        // let ctxLine,
+        //     ctxBar,
+        //     ctxPie,
+        //     optionsLine,
+        //     optionsBar,
+        //     optionsPie,
+        //     configLine,
+        //     configBar,
+        //     configPie,
+        //     lineChart;
+        // barChart, pieChart;
+        // // DOM is ready
+        // $(function() {
+        //     updateChartOptions();
+        //     drawLineChart(); // Line Chart
+        //     drawBarChart(); // Bar Chart
+        //     drawPieChart(); // Pie Chart
+        //     drawCalendar(); // Calendar
+        //     $(window).resize(function() {
+        //         updateChartOptions();
+        //         updateLineChart();
+        //         updateBarChart();
+        //         reloadPage();
+        //     });
+        // })
+    </script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/jquery.validate.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/custom-alert.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/form-validation.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <script>
+        var taskTypeOldVal = '';
+        var categoryOldVal = '';
+        var projectListVal = '';
+        var activityListVal = '';
+        $(document).ready(function() {
+            $('#bug-id-section').hide();
+            taskTypeList()
+            projectList()
+            $('#project').on('change', function(e) {
+                categoryList(this.value);
+            });
+            $('#taskType').on('change', function(e) {
+                var selectedText = $(this).find('option:selected').text()
+                $('#taskTypeText').val($('#taskType').find('option:selected').text());
+                if (selectedText == 'Bug Fixing') {
+                    $('#bug-id-section').show();
+                } else if (selectedText == 'Bug Verifications') {
+                    $('#bug-id-section').show();
+                } else {
+                    $('#bug-id-section').hide();
+                }
+            });
+            $('#category').on('change', function(e) {
+                activityList(this.value);
+            });
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date + ' ' + time;
+            // alert(dateTime)
+            $('#dtime').val(dateTime)
+            $('#dtime_only').val(time)
+            // console.log(dateTime);
+            // $("#dtime").flatpickr({
+            //     dateFormat: "Y-m-d",
+            //     maxDate: "today",
+            // });
+            $('#dtime').datetimepicker({
+                format: 'Y-m-d',
+                timepicker: false,
+                maxDate: '0',
+                value: new Date(), // Set the value to current date
+                scrollInput: false
+            });
+            // $("#dtime_only").flatpickr({
+            //     enableTime: true,
+            //     noCalendar: true,
+            //     enableSeconds: true,
+            //     defaultTime: time,
+            //     dateFormat: "H:i:S",
+            //     onValueUpdate: function(selectedDates, dateStr, instance) {
+            //         var input = instance._input;
+            //         var timeStr = input.value.split(" ")[1];
+            //         if (timeStr) {
+            //             var timeParts = timeStr.split(":");
+            //             if (timeParts.length === 3) {
+            //                 timeParts[2] = ("0" + timeParts[2]).slice(-2);
+            //                 var newTimeStr = timeParts.join(":");
+            //                 input.value = input.value.split(" ")[0] + " " + newTimeStr;
+            //             }
+            //         }
+            //     }
+            // });
+            $('#dtime_only').timepicker({
+                timeFormat: 'h:i A', // Set the time format in 12-hour format with AM/PM
+                step: 1, // Set step size to 1 second
+                showSeconds: true, // Show seconds
+                changeTime: function(time) {
+                    $('#dtime_only').val(time); // Update input field with selected time
+                }
+            });
+            var currentTime = new Date();
+            $('#dtime_only').timepicker('setTime', currentTime);
+            $('#start-task').on('click', function(e) {
+                var usertime = $('#dtime_only').val();
+                var currentDateTime = new Date();
+                var userDateTimenew = new Date($('#dtime').val() + ' ' + usertime);
+                var userDatenew = new Date($('#dtime').val());
+                var userDatenewdate = userDatenew.getFullYear() + '-' + (userDatenew.getMonth() + 1) +
+                    '-' +
+                    userDatenew.getDate();
+                if ($('#activity_status').valid()) {
+                    $('#taskTypeText').val($('#taskType').find('option:selected').text());
+                    var userDateTime = $('#dtime').val() + ' ' + usertime;
+                    var currentDateFinal = new Date(date);
+                    var selectedDateFinal = new Date(userDatenewdate);
+                    if (currentDateFinal < selectedDateFinal) {
+                        $("#error_for_date").empty();
+                        $("#error_for_time").empty();
+                        $("#error_for_time").text("The date can't be future date.");
+                        return false
+                    } else if (userDateTimenew > currentDateTime) {
+                        $("#error_for_time").empty();
+                        $("#error_for_date").empty();
+                        $("#error_for_time").text("Please select a valid time");
+                        return false;
+                    } else {
+                        $("#error_for_date").empty();
+                        $("#error_for_time").empty();
+                        return true
+                    }
+                }
+            });
+        });
+        // Function to fetch task types and populate the dropdown
+        function taskTypeList() {
+            $('#taskType option').remove();
+            $('#taskType').append($("<option></option>")
+                .attr("value", "")
+                .text("Select"));
+            var dataArr;
+            $.ajax({
+                type: "GET",
+                url: "https://dtm.payable.lk/taskTypeList",
+                dataType: "json",
+                data: {
+                    status: 1,
+                    _token: 'OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt'
+                },
+                beforeSend: function() {
+                    $("#taskType option[value='']").text("Loading...");
+                },
+                complete: function() {
+                    $("#taskType option[value='']").text("Select");
+                },
+                success: function(msg) {
+                    dataArr = msg;
+                    $.each(dataArr, function(i) {
+                        if ($("#taskType option[value=" + dataArr[i]['id'] + "]").length == 0) {
+                            $('#taskType').append($("<option></option>")
+                                .attr("value", dataArr[i]['id'])
+                                .text(dataArr[i]['name']));
+                        }
+                    });
+                    console.log(taskTypeOldVal);
+                    if (taskTypeOldVal != "") {
+                        $("#taskType option[value=" + taskTypeOldVal + "]").attr("selected", "selected");
+                        $("#taskType").trigger("change");
+                    } else {
+                        $("#taskType option[value='']").attr("selected", "selected");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching task types:', error);
+                    // Optionally handle errors here
+                    $('#taskType option').remove();
+                    $('#taskType').append($("<option></option>").attr("value", "").text(
+                        "Error fetching data"));
+                }
+            });
+        }
+
+        function projectList() {
+            $('#project option').remove();
+            $('#project').append($("<option></option>")
+                .attr("value", "")
+                .text("Select"));
+            var dataArr;
+            $.ajax({
+                type: "GET",
+                url: "https://dtm.payable.lk/productList",
+                dataType: "json",
+                data: {
+                    status: 1,
+                    _token: 'OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt'
+                },
+                beforeSend: function() {
+                    $("#project option[value='']").text("Loading...");
+                },
+                complete: function() {
+                    $("#project option[value='']").text("Select");
+                },
+                success: function(msg) {
+                    dataArr = msg;
+                    $.each(dataArr, function(i) {
+                        if ($("#project option[value=" + dataArr[i]['id'] + "]").length == 0) {
+                            $('#project').append($("<option></option>")
+                                .attr("value", dataArr[i]['id'])
+                                .text(dataArr[i]['name']));
+                        }
+                    });
+                    console.log(projectListVal)
+                    if (projectListVal != "") {
+                        $("#project option[value=" + projectListVal + "]").attr("selected", "selected");
+                        $("#project").trigger("change");
+                    } else {
+                        $("#project option[value='']").attr("selected", "selected");
+                    }
+                }
+            });
+        }
+
+        function categoryList(project) {
+            var selectedProject = project
+            $('#category option').remove();
+            $('#category').append($("<option></option>")
+                .attr("value", "")
+                .text("Select"));
+            $('#activity option').remove();
+            $('#activity').append($("<option></option>")
+                .attr("value", "")
+                .text("Select"));
+            var dataArr;
+            $.ajax({
+                type: "GET",
+                url: "https://dtm.payable.lk/categoryList",
+                dataType: "json",
+                data: {
+                    status: 1,
+                    project: selectedProject,
+                    _token: 'OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt'
+                },
+                beforeSend: function() {
+                    $("#category option[value='']").text("Loading...");
+                },
+                complete: function() {
+                    $("#category option[value='']").text("Select");
+                },
+                success: function(msg) {
+                    dataArr = msg;
+                    $.each(dataArr, function(i) {
+                        if ($("#category option[value=" + dataArr[i]['id'] + "]").length == 0) {
+                            $('#category').append($("<option></option>")
+                                .attr("value", dataArr[i]['id'])
+                                .text(dataArr[i]['name']));
+                        }
+                    });
+                    if (categoryOldVal != "") {
+                        $("#category option[value=" + categoryOldVal + "]").attr("selected",
+                            "selected");
+                        $("#category").trigger("change");
+                    } else {
+                        $("#category option[value='']").attr("selected", "selected");
+                    }
+                }
+            });
+        }
+
+        function activityList(category) {
+            var selectedCategory = category
+            var selectedProjectCurrent = $('#project').val()
+            $('#activity option').remove();
+            $('#activity').append($("<option></option>")
+                .attr("value", "")
+                .text("Select"));
+            var dataArr;
+            $.ajax({
+                type: "GET",
+                url: "https://dtm.payable.lk/activityList",
+                dataType: "json",
+                data: {
+                    status: 1,
+                    project: selectedProjectCurrent,
+                    categoryId: selectedCategory,
+                    _token: 'OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt'
+                },
+                beforeSend: function() {
+                    $("#activity option[value='']").text("Loading...");
+                },
+                complete: function() {
+                    $("#activity option[value='']").text("Select");
+                },
+                success: function(msg) {
+                    dataArr = msg;
+                    $.each(dataArr, function(i) {
+                        if ($("#activity option[value=" + dataArr[i]['id'] + "]").length == 0) {
+                            $('#activity').append($("<option></option>")
+                                .attr("value", dataArr[i]['id'])
+                                .text(dataArr[i]['name']));
+                        }
+                    });
+                    if (activityListVal != "") {
+                        $("#activity option[value=" + activityListVal + "]").attr("selected",
+                            "selected");
+                        $("#activity").trigger("change");
+                    } else {
+                        $("#activity option[value='']").attr("selected", "selected");
+                    }
+                }
+            });
+        }
+    </script>
+
+    <div class="xdsoft_datetimepicker xdsoft_noselect xdsoft_">
+        <div class="xdsoft_datepicker active">
+            <div class="xdsoft_monthpicker"><button type="button" class="xdsoft_prev"
+                    style="visibility: visible;"></button><button type="button" class="xdsoft_today_button"
+                    style="visibility: visible;"></button>
+                <div class="xdsoft_label xdsoft_month"><span>October</span>
+                    <div class="xdsoft_select xdsoft_monthselect xdsoft_scroller_box">
+                        <div style="margin-top: 0px;">
+                            <div class="xdsoft_option " data-value="0">January</div>
+                            <div class="xdsoft_option " data-value="1">February</div>
+                            <div class="xdsoft_option " data-value="2">March</div>
+                            <div class="xdsoft_option " data-value="3">April</div>
+                            <div class="xdsoft_option " data-value="4">May</div>
+                            <div class="xdsoft_option " data-value="5">June</div>
+                            <div class="xdsoft_option " data-value="6">July</div>
+                            <div class="xdsoft_option " data-value="7">August</div>
+                            <div class="xdsoft_option " data-value="8">September</div>
+                            <div class="xdsoft_option xdsoft_current" data-value="9">October</div>
+                            <div class="xdsoft_option " data-value="10">November</div>
+                            <div class="xdsoft_option " data-value="11">December</div>
+                        </div>
+                        <div class="xdsoft_scrollbar">
+                            <div class="xdsoft_scroller" style="height: 10px; margin-top: 0px;"></div>
+                        </div>
+                    </div><i></i>
+                </div>
+                <div class="xdsoft_label xdsoft_year"><span>2025</span>
+                    <div class="xdsoft_select xdsoft_yearselect xdsoft_scroller_box">
+                        <div style="margin-top: 0px;">
+                            <div class="xdsoft_option " data-value="1950">1950</div>
+                            <div class="xdsoft_option " data-value="1951">1951</div>
+                            <div class="xdsoft_option " data-value="1952">1952</div>
+                            <div class="xdsoft_option " data-value="1953">1953</div>
+                            <div class="xdsoft_option " data-value="1954">1954</div>
+                            <div class="xdsoft_option " data-value="1955">1955</div>
+                            <div class="xdsoft_option " data-value="1956">1956</div>
+                            <div class="xdsoft_option " data-value="1957">1957</div>
+                            <div class="xdsoft_option " data-value="1958">1958</div>
+                            <div class="xdsoft_option " data-value="1959">1959</div>
+                            <div class="xdsoft_option " data-value="1960">1960</div>
+                            <div class="xdsoft_option " data-value="1961">1961</div>
+                            <div class="xdsoft_option " data-value="1962">1962</div>
+                            <div class="xdsoft_option " data-value="1963">1963</div>
+                            <div class="xdsoft_option " data-value="1964">1964</div>
+                            <div class="xdsoft_option " data-value="1965">1965</div>
+                            <div class="xdsoft_option " data-value="1966">1966</div>
+                            <div class="xdsoft_option " data-value="1967">1967</div>
+                            <div class="xdsoft_option " data-value="1968">1968</div>
+                            <div class="xdsoft_option " data-value="1969">1969</div>
+                            <div class="xdsoft_option " data-value="1970">1970</div>
+                            <div class="xdsoft_option " data-value="1971">1971</div>
+                            <div class="xdsoft_option " data-value="1972">1972</div>
+                            <div class="xdsoft_option " data-value="1973">1973</div>
+                            <div class="xdsoft_option " data-value="1974">1974</div>
+                            <div class="xdsoft_option " data-value="1975">1975</div>
+                            <div class="xdsoft_option " data-value="1976">1976</div>
+                            <div class="xdsoft_option " data-value="1977">1977</div>
+                            <div class="xdsoft_option " data-value="1978">1978</div>
+                            <div class="xdsoft_option " data-value="1979">1979</div>
+                            <div class="xdsoft_option " data-value="1980">1980</div>
+                            <div class="xdsoft_option " data-value="1981">1981</div>
+                            <div class="xdsoft_option " data-value="1982">1982</div>
+                            <div class="xdsoft_option " data-value="1983">1983</div>
+                            <div class="xdsoft_option " data-value="1984">1984</div>
+                            <div class="xdsoft_option " data-value="1985">1985</div>
+                            <div class="xdsoft_option " data-value="1986">1986</div>
+                            <div class="xdsoft_option " data-value="1987">1987</div>
+                            <div class="xdsoft_option " data-value="1988">1988</div>
+                            <div class="xdsoft_option " data-value="1989">1989</div>
+                            <div class="xdsoft_option " data-value="1990">1990</div>
+                            <div class="xdsoft_option " data-value="1991">1991</div>
+                            <div class="xdsoft_option " data-value="1992">1992</div>
+                            <div class="xdsoft_option " data-value="1993">1993</div>
+                            <div class="xdsoft_option " data-value="1994">1994</div>
+                            <div class="xdsoft_option " data-value="1995">1995</div>
+                            <div class="xdsoft_option " data-value="1996">1996</div>
+                            <div class="xdsoft_option " data-value="1997">1997</div>
+                            <div class="xdsoft_option " data-value="1998">1998</div>
+                            <div class="xdsoft_option " data-value="1999">1999</div>
+                            <div class="xdsoft_option " data-value="2000">2000</div>
+                            <div class="xdsoft_option " data-value="2001">2001</div>
+                            <div class="xdsoft_option " data-value="2002">2002</div>
+                            <div class="xdsoft_option " data-value="2003">2003</div>
+                            <div class="xdsoft_option " data-value="2004">2004</div>
+                            <div class="xdsoft_option " data-value="2005">2005</div>
+                            <div class="xdsoft_option " data-value="2006">2006</div>
+                            <div class="xdsoft_option " data-value="2007">2007</div>
+                            <div class="xdsoft_option " data-value="2008">2008</div>
+                            <div class="xdsoft_option " data-value="2009">2009</div>
+                            <div class="xdsoft_option " data-value="2010">2010</div>
+                            <div class="xdsoft_option " data-value="2011">2011</div>
+                            <div class="xdsoft_option " data-value="2012">2012</div>
+                            <div class="xdsoft_option " data-value="2013">2013</div>
+                            <div class="xdsoft_option " data-value="2014">2014</div>
+                            <div class="xdsoft_option " data-value="2015">2015</div>
+                            <div class="xdsoft_option " data-value="2016">2016</div>
+                            <div class="xdsoft_option " data-value="2017">2017</div>
+                            <div class="xdsoft_option " data-value="2018">2018</div>
+                            <div class="xdsoft_option " data-value="2019">2019</div>
+                            <div class="xdsoft_option " data-value="2020">2020</div>
+                            <div class="xdsoft_option " data-value="2021">2021</div>
+                            <div class="xdsoft_option " data-value="2022">2022</div>
+                            <div class="xdsoft_option " data-value="2023">2023</div>
+                            <div class="xdsoft_option " data-value="2024">2024</div>
+                            <div class="xdsoft_option xdsoft_current" data-value="2025">2025</div>
+                            <div class="xdsoft_option " data-value="2026">2026</div>
+                            <div class="xdsoft_option " data-value="2027">2027</div>
+                            <div class="xdsoft_option " data-value="2028">2028</div>
+                            <div class="xdsoft_option " data-value="2029">2029</div>
+                            <div class="xdsoft_option " data-value="2030">2030</div>
+                            <div class="xdsoft_option " data-value="2031">2031</div>
+                            <div class="xdsoft_option " data-value="2032">2032</div>
+                            <div class="xdsoft_option " data-value="2033">2033</div>
+                            <div class="xdsoft_option " data-value="2034">2034</div>
+                            <div class="xdsoft_option " data-value="2035">2035</div>
+                            <div class="xdsoft_option " data-value="2036">2036</div>
+                            <div class="xdsoft_option " data-value="2037">2037</div>
+                            <div class="xdsoft_option " data-value="2038">2038</div>
+                            <div class="xdsoft_option " data-value="2039">2039</div>
+                            <div class="xdsoft_option " data-value="2040">2040</div>
+                            <div class="xdsoft_option " data-value="2041">2041</div>
+                            <div class="xdsoft_option " data-value="2042">2042</div>
+                            <div class="xdsoft_option " data-value="2043">2043</div>
+                            <div class="xdsoft_option " data-value="2044">2044</div>
+                            <div class="xdsoft_option " data-value="2045">2045</div>
+                            <div class="xdsoft_option " data-value="2046">2046</div>
+                            <div class="xdsoft_option " data-value="2047">2047</div>
+                            <div class="xdsoft_option " data-value="2048">2048</div>
+                            <div class="xdsoft_option " data-value="2049">2049</div>
+                            <div class="xdsoft_option " data-value="2050">2050</div>
+                        </div>
+                        <div class="xdsoft_scrollbar">
+                            <div class="xdsoft_scroller" style="height: 10px; margin-top: 0px;"></div>
+                        </div>
+                    </div><i></i>
+                </div><button type="button" class="xdsoft_next" style="visibility: visible;"></button>
+            </div>
+            <div class="xdsoft_calendar">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-date="28" data-month="8" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week0 xdsoft_date xdsoft_other_month xdsoft_weekend"
+                                title="">
+                                <div>28</div>
+                            </td>
+                            <td data-date="29" data-month="8" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week1 xdsoft_date xdsoft_other_month" title="">
+                                <div>29</div>
+                            </td>
+                            <td data-date="30" data-month="8" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week2 xdsoft_date xdsoft_other_month" title="">
+                                <div>30</div>
+                            </td>
+                            <td data-date="1" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week3 xdsoft_date" title="">
+                                <div>1</div>
+                            </td>
+                            <td data-date="2" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week4 xdsoft_date" title="">
+                                <div>2</div>
+                            </td>
+                            <td data-date="3" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week5 xdsoft_date" title="">
+                                <div>3</div>
+                            </td>
+                            <td data-date="4" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week6 xdsoft_date xdsoft_weekend" title="">
+                                <div>4</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-date="5" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week0 xdsoft_date xdsoft_weekend" title="">
+                                <div>5</div>
+                            </td>
+                            <td data-date="6" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week1 xdsoft_date" title="">
+                                <div>6</div>
+                            </td>
+                            <td data-date="7" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week2 xdsoft_date" title="">
+                                <div>7</div>
+                            </td>
+                            <td data-date="8" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week3 xdsoft_date" title="">
+                                <div>8</div>
+                            </td>
+                            <td data-date="9" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week4 xdsoft_date" title="">
+                                <div>9</div>
+                            </td>
+                            <td data-date="10" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week5 xdsoft_date" title="">
+                                <div>10</div>
+                            </td>
+                            <td data-date="11" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week6 xdsoft_date xdsoft_weekend" title="">
+                                <div>11</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-date="12" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week0 xdsoft_date xdsoft_weekend" title="">
+                                <div>12</div>
+                            </td>
+                            <td data-date="13" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week1 xdsoft_date" title="">
+                                <div>13</div>
+                            </td>
+                            <td data-date="14" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week2 xdsoft_date" title="">
+                                <div>14</div>
+                            </td>
+                            <td data-date="15" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week3 xdsoft_date" title="">
+                                <div>15</div>
+                            </td>
+                            <td data-date="16" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week4 xdsoft_date" title="">
+                                <div>16</div>
+                            </td>
+                            <td data-date="17" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week5 xdsoft_date" title="">
+                                <div>17</div>
+                            </td>
+                            <td data-date="18" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week6 xdsoft_date xdsoft_weekend" title="">
+                                <div>18</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-date="19" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week0 xdsoft_date xdsoft_weekend" title="">
+                                <div>19</div>
+                            </td>
+                            <td data-date="20" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week1 xdsoft_date xdsoft_current xdsoft_today"
+                                title="">
+                                <div>20</div>
+                            </td>
+                            <td data-date="21" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week2 xdsoft_date xdsoft_disabled" title="">
+                                <div>21</div>
+                            </td>
+                            <td data-date="22" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week3 xdsoft_date xdsoft_disabled" title="">
+                                <div>22</div>
+                            </td>
+                            <td data-date="23" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week4 xdsoft_date xdsoft_disabled" title="">
+                                <div>23</div>
+                            </td>
+                            <td data-date="24" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week5 xdsoft_date xdsoft_disabled" title="">
+                                <div>24</div>
+                            </td>
+                            <td data-date="25" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week6 xdsoft_date xdsoft_disabled xdsoft_weekend"
+                                title="">
+                                <div>25</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-date="26" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week0 xdsoft_date xdsoft_disabled xdsoft_weekend"
+                                title="">
+                                <div>26</div>
+                            </td>
+                            <td data-date="27" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week1 xdsoft_date xdsoft_disabled" title="">
+                                <div>27</div>
+                            </td>
+                            <td data-date="28" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week2 xdsoft_date xdsoft_disabled" title="">
+                                <div>28</div>
+                            </td>
+                            <td data-date="29" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week3 xdsoft_date xdsoft_disabled" title="">
+                                <div>29</div>
+                            </td>
+                            <td data-date="30" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week4 xdsoft_date xdsoft_disabled" title="">
+                                <div>30</div>
+                            </td>
+                            <td data-date="31" data-month="9" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week5 xdsoft_date xdsoft_disabled" title="">
+                                <div>31</div>
+                            </td>
+                            <td data-date="1" data-month="10" data-year="2025"
+                                class="xdsoft_date xdsoft_day_of_week6 xdsoft_date xdsoft_disabled xdsoft_other_month xdsoft_weekend"
+                                title="">
+                                <div>1</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><button type="button" class="xdsoft_save_selected blue-gradient-button" style="display: none;">Save
+                Selected</button>
+        </div>
+        <div class="xdsoft_timepicker"><button type="button" class="xdsoft_prev"></button>
+            <div class="xdsoft_time_box xdsoft_scroller_box">
+                <div class="xdsoft_time_variant" style="margin-top: 0px;">
+                    <div class="xdsoft_time " data-hour="0" data-minute="0">00:00</div>
+                    <div class="xdsoft_time " data-hour="1" data-minute="0">01:00</div>
+                    <div class="xdsoft_time " data-hour="2" data-minute="0">02:00</div>
+                    <div class="xdsoft_time " data-hour="3" data-minute="0">03:00</div>
+                    <div class="xdsoft_time " data-hour="4" data-minute="0">04:00</div>
+                    <div class="xdsoft_time " data-hour="5" data-minute="0">05:00</div>
+                    <div class="xdsoft_time " data-hour="6" data-minute="0">06:00</div>
+                    <div class="xdsoft_time " data-hour="7" data-minute="0">07:00</div>
+                    <div class="xdsoft_time " data-hour="8" data-minute="0">08:00</div>
+                    <div class="xdsoft_time " data-hour="9" data-minute="0">09:00</div>
+                    <div class="xdsoft_time xdsoft_current" data-hour="10" data-minute="0">10:00</div>
+                    <div class="xdsoft_time " data-hour="11" data-minute="0">11:00</div>
+                    <div class="xdsoft_time " data-hour="12" data-minute="0">12:00</div>
+                    <div class="xdsoft_time " data-hour="13" data-minute="0">13:00</div>
+                    <div class="xdsoft_time " data-hour="14" data-minute="0">14:00</div>
+                    <div class="xdsoft_time " data-hour="15" data-minute="0">15:00</div>
+                    <div class="xdsoft_time " data-hour="16" data-minute="0">16:00</div>
+                    <div class="xdsoft_time " data-hour="17" data-minute="0">17:00</div>
+                    <div class="xdsoft_time " data-hour="18" data-minute="0">18:00</div>
+                    <div class="xdsoft_time " data-hour="19" data-minute="0">19:00</div>
+                    <div class="xdsoft_time " data-hour="20" data-minute="0">20:00</div>
+                    <div class="xdsoft_time " data-hour="21" data-minute="0">21:00</div>
+                    <div class="xdsoft_time " data-hour="22" data-minute="0">22:00</div>
+                    <div class="xdsoft_time " data-hour="23" data-minute="0">23:00</div>
+                </div>
+                <div class="xdsoft_scrollbar">
+                    <div class="xdsoft_scroller" style="height: 10px; margin-top: 0px;"></div>
+                </div>
+            </div><button type="button" class="xdsoft_next"></button>
+        </div>
+    </div>
+</body>
+
+</html>

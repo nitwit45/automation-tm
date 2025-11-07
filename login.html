@@ -1,0 +1,159 @@
+<html lang="en">
+
+<head>
+
+    <meta name="csrf-token" content="OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PAYable IT</title>
+    <link rel="shortcut icon" href="https://dtm.payable.lk/plugins/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/tooplate.css">
+    <style type="text/css">
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body class="bg03">
+    <div class="container">
+        <div class="row tm-mt-big">
+            <div class="col-12 mx-auto tm-login-col">
+                <div class="bg-white tm-block">
+
+                    <style>
+                        .error {
+                            color: #ff0000;
+                            margin-bottom: 7px;
+                        }
+                    </style>
+                    <link rel="stylesheet"
+                        href="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.css">
+                    <div class="row">
+                        <div class="col-12 text-center">
+
+                            <img src="https://dtm.payable.lk/plugins/images/logo.svg" style=" width: 100px;" alt="logo">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <!-- <i class="fas fa-3x fa-tachometer-alt tm-site-icon text-center"></i> -->
+                                    <span style="color:#0c75c9 ;">TASK</span> <span style="color:#9e9e9e ;">
+                                        MONITOR</span>
+                                </div>
+                            </div>
+
+                            <h2 class="tm-block-title mt-3">Login</h2>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+
+                            <!-- TODO -->
+                            <!-- Login
+    Server error: `POST https://dtm.payable.lk/PayableTeamTimeTrackerApiLogin/user/login` resulted in a `503 Service Unavailable` response: <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"> <html><head> <title>503 Service Unavailable</title> </head><body> <h1 (truncated...) -->
+
+                            <script src="https://dtm.payable.lk/plugins/js/sweetalert.min.js"></script>
+
+                            <form method="POST" action="https://dtm.payable.lk/login" id="login-form" autocomplete="off"
+                                class="tm-login-form" enctype="multipart/form-data" novalidate="novalidate">
+                                <input type="hidden" name="_token" value="OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <label for="username" class="col-form-label">Username</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input value="" name="sys_login_user" id="sys_login_user" type="email"
+                                                class="form-control validate">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <label for="password" class="col-form-label">Password</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input value="" id="sys_login_pwd" name="sys_login_pwd" type="password"
+                                                class="form-control validate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <button type="submit"
+                                                class="btn btn-primary d-inline-block mx-auto">Login</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script src="https://dtm.payable.lk/plugins/js/jquery-3.3.1.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/moment.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/utils.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/Chart.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/fullcalendar.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/bootstrap.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/tooplate-scripts.js"></script>
+
+        <script src="https://dtm.payable.lk/plugins/js/other/datatables/jquery.dataTables.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/other/datatables/dataTables.bootstrap4.js"></script>
+        <!-- <script src="https://dtm.payable.lk/plugins/js/other/datatables/dataTables.select.min.js"></script> -->
+
+        <script src="https://dtm.payable.lk/plugins/js/other/form-ele/jquery.validate.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/other/form-ele/bootstrap-maxlength.min.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/other/form-ele/form-validation.js"></script>
+        <script src="https://dtm.payable.lk/plugins/js/other/form-ele/bt-maxLength.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <footer class="row tm-mt-big">
+            <div class="col-12 font-weight-light text-center">
+                <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+                    Copyright © 2024. Created by
+                    <a href="http://www.payable.lk" class="text-white tm-footer-link">PAYable</a> | IT
+                    <small>(v1.3.3L)</small>
+                </p>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

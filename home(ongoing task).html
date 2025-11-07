@@ -1,0 +1,677 @@
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            transition: opacity ease-in 0.2s;
+        }
+
+        body[unresolved] {
+            opacity: 0;
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
+
+    <meta name="csrf-token" content="OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TASK MONITOR</title>
+    <link rel="shortcut icon" href="https://dtm.payable.lk/plugins/images/fav_time.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600"> -->
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/tooplate.css">
+
+    <!-- <link rel="stylesheet" href="https://preview.colorlib.com/theme/bootstrap/css-table-13/css/owl.carousel.min.css">
+    
+         -->
+
+    <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/other/datatables/dataTables.bootstrap4.css">
+    <!-- <link rel="stylesheet" href="https://dtm.payable.lk/plugins/css/other/datatables/select.dataTables.min.css"> -->
+
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-xl navbar-light bg-light">
+                        <a class="navbar-brand " href="#">
+                            <!-- <i class="fas fa-3x fa-tachometer-alt tm-site-icon"></i> -->
+                            <img src="https://dtm.payable.lk/plugins/images/logo-mini.svg" class="brand-logo-mini"
+                                style="width: calc(90px - 30px);
+      max-width: 100%;" alt="logo"></a>
+                        <h2 class="tm-site-title mb-0"><span style="color:#0c75c9 ;">TASK</span> <span
+                                style="color:#9e9e9e ;"> MONITOR</span></h2>
+
+                        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mx-auto">
+
+                                <li class="nav-item">
+                                    <a class="nav-link  active" href="https://dtm.payable.lk/home">Home
+                                        <span class="sr-only"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="https://dtm.payable.lk/task">Start Task</a>
+                                </li>
+
+                                <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle  OR  " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://dtm.payable.lk/report-by-staff">Detailed Report 1</a>
+                                <a class="dropdown-item" href="https://dtm.payable.lk/report-by-projects">Detailed Report 2</a>
+                            </div>
+                        </li> -->
+
+                                <!-- <li class="nav-item">
+                            <a class="nav-link" href="accounts.html">Accounts</a>
+                        </li> -->
+                                <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Settings
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Billing</a>
+                                <a class="dropdown-item" href="#">Customize</a>
+                            </div>
+                        </li> -->
+                            </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex" href="https://dtm.payable.lk/logout">
+                                        <i class="far fa-user mr-2 tm-logout-icon"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- <link rel="stylesheet" href="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.css"> -->
+
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
+            <link rel="stylesheet" href="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.css">
+            <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.css">
+
+            <div class="row tm-content-row tm-mt-big">
+                <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
+                    <div class="bg-white tm-block h-100">
+
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12">
+                                <h2 class="tm-block-title d-inline-block" style="font-size: 1.2rem;"> Welcome back,
+                                    <b>Nithila Ariyapperuma</b>
+                                </h2>
+
+                            </div>
+                            <div class="col-md-4 col-sm-12 text-right">
+                                <!-- <a href="add-product.html" class="btn btn-small btn-primary">Add New Product</a> -->
+                                <div class="input-group">
+                                    <input type="date" id="search_time" name="search_time"
+                                        class="form-control validate col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                        value="2025-10-20">
+
+                                    <!-- <input id="name" name="name" type="text" class="form-control validate col-xl-12 col-lg-12 col-md-12 col-sm-12"> -->
+                                </div>
+                                <label id="error_for_time" class="mt-2 text-danger"></label>
+                            </div>
+                        </div>
+                        <script src="https://dtm.payable.lk/plugins/js/sweetalert.min.js"></script>
+                        <script>
+                            swal({
+                                title: "Success",
+                                text: "Task has been added successfully.",
+                                icon: "success",
+                                // timer: 10000,
+                                button: "Ok"
+                            });
+                        </script>
+
+                        <div class="table-responsive">
+                            <div id="table-home_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length" id="table-home_length"><label>Show <select
+                                                    name="table-home_length" aria-controls="table-home"
+                                                    class="custom-select custom-select-sm form-control form-control-sm">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                </select> entries</label></div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="table-home"
+                                            class="table custom-table table-hover table-striped tm-table-striped-even mt-3 dataTable no-footer"
+                                            role="grid" aria-describedby="table-home_info" style="width: 958px;">
+                                            <thead>
+                                                <tr class="tm-bg-gray" role="row">
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 40px;">#</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 69px;">Category</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 56px;">Activity</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 37px;">Task Type</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 36px;">Task</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 39px;">Start Time</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 39px;">End Time</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 64px;">Duration</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 49px;">Status</th>
+                                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        style="width: 49px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr class="odd">
+                                                    <td>1</td>
+                                                    <td>Mobile App<small class="d-block" style="color:#1e0c0c;"> <b>
+                                                                PROJ - PropTech</b></small></td>
+                                                    <td>Development</td>
+                                                    <td>Development</td>
+                                                    <td>testing live bugs</td>
+                                                    <td>25-10-18 09:00:00<small class="d-block"> [25-10-20
+                                                            09:59:02]</small></td>
+                                                    <td>N/A<small class="d-block"> [N/A]</small></td>
+                                                    <td>48:59:42 Hrs</td>
+                                                    <td>
+                                                        <div class="tm-status-circle pending">
+                                                        </div> On Going
+                                                    </td>
+                                                    <td><a data-toggle="tooltip" title="Task Pause"
+                                                            data-category="pause the task"
+                                                            href="task/updatetask/1/f8f92b8f-a10a-46ee-918b-39030d95ba2d"
+                                                            onclick="updateTaskStatusWithDate(event);"
+                                                            data-tbl-id="#table-home" class="tm-product-delete-link"
+                                                            id="my-action">
+                                                            <i class="fa fa-pause tm-product-delete-icon pause-task"
+                                                                id="my-action-i"></i>
+                                                        </a>&nbsp;&nbsp;<a data-toggle="tooltip" title="Task End"
+                                                            data-category="end the task"
+                                                            href="task/updatetask/4/f8f92b8f-a10a-46ee-918b-39030d95ba2d"
+                                                            onclick="updateTaskStatusWithDate(event);"
+                                                            data-tbl-id="#table-home" class="tm-product-delete-link"
+                                                            id="my-action">
+                                                            <i class="fa fa-power-off tm-product-delete-icon end-task"
+                                                                id="my-action-i"></i>
+                                                        </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="table-home_processing" class="dataTables_processing card"
+                                            style="display: none;">Processing...</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="table-home_info" role="status"
+                                            aria-live="polite">Showing 1 to 1 of 1 entries</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="table-home_paginate">
+                                            <ul class="pagination">
+                                                <li class="paginate_button page-item previous disabled"
+                                                    id="table-home_previous"><a href="#" aria-controls="table-home"
+                                                        data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                <li class="paginate_button page-item active"><a href="#"
+                                                        aria-controls="table-home" data-dt-idx="1" tabindex="0"
+                                                        class="page-link">1</a></li>
+                                                <li class="paginate_button page-item next disabled"
+                                                    id="table-home_next"><a href="#" aria-controls="table-home"
+                                                        data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tm-table-mt tm-table-actions-row">
+                            <div class="tm-table-actions-col-left">
+                                <div class="tm-pagination-label">My Current Task Status: <b><span id="taskStatus">
+                                            <div class="tm-status-circle pending">
+                                            </div> On Going
+                                        </span></b></div>
+                            </div>
+                            <div class="tm-table-actions-col-right">
+                                <div class="tm-pagination-label">Total Working Hours for the Day: <b><span
+                                            id="totalHr">48:59:42 Hrs</span></b> </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <footer class="row tm-mt-small">
+                <div class="col-12 font-weight-light">
+                    <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+                        Copyright © 2024. Created by
+                        <a href="http://www.payable.lk" class="text-white tm-footer-link">PAYable</a> | IT
+                        <small>(v1.3.3L)</small>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div class="swal-overlay" tabindex="-1">
+        <div class="swal-modal" role="dialog" aria-modal="true">
+            <div class="swal-icon swal-icon--success">
+                <span class="swal-icon--success__line swal-icon--success__line--long"></span>
+                <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
+
+                <div class="swal-icon--success__ring"></div>
+                <div class="swal-icon--success__hide-corners"></div>
+            </div>
+            <div class="swal-title" style="">Success</div>
+            <div class="swal-text" style="">Task has been added successfully.</div>
+            <div class="swal-footer">
+                <div class="swal-button-container">
+
+                    <button class="swal-button swal-button--confirm">Ok</button>
+
+                    <div class="swal-button__loader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script src="https://dtm.payable.lk/plugins/js/jquery-3.3.1.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/moment.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/utils.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/Chart.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/fullcalendar.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/bootstrap.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/tooplate-scripts.js"></script>
+
+    <script src="https://dtm.payable.lk/plugins/js/other/datatables/jquery.dataTables.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- <script src="https://dtm.payable.lk/plugins/js/other/datatables/dataTables.select.min.js"></script> -->
+
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/jquery.validate.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/bootstrap-maxlength.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/form-validation.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/bt-maxLength.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="https://dtm.payable.lk/plugins/js/sweetalert.min.js"></script>
+
+    <script>
+        // $(document).ready(function() {
+        //     var tid = setInterval(chk_my_auth, 2000);
+        //     function chk_my_auth() {
+        //         $.ajax({
+        //             "type": "GET",
+        //             "url": "https://dtm.payable.lk/checkSessionLive",
+        //             "dataType": "JSON",
+        //             cache: false,
+        //             success: function(results) {
+        //                 // console.log(results.success)
+        //                 if (results.success) {
+        //                     console.log('true')
+        //                 } else {
+        //                     console.log('logout')
+        //                     window.location.href = "https://dtm.payable.lk/logoutSessionOut";
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
+        // let ctxLine,
+        //     ctxBar,
+        //     ctxPie,
+        //     optionsLine,
+        //     optionsBar,
+        //     optionsPie,
+        //     configLine,
+        //     configBar,
+        //     configPie,
+        //     lineChart;
+        // barChart, pieChart;
+        // // DOM is ready
+        // $(function() {
+        //     updateChartOptions();
+        //     drawLineChart(); // Line Chart
+        //     drawBarChart(); // Bar Chart
+        //     drawPieChart(); // Pie Chart
+        //     drawCalendar(); // Calendar
+        //     $(window).resize(function() {
+        //         updateChartOptions();
+        //         updateLineChart();
+        //         updateBarChart();
+        //         reloadPage();
+        //     });
+        // })
+    </script>
+    <!-- <script src="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.js"></script>
+                                        <script src="https://dtm.payable.lk/plugins/js/custom-alert.js"></script> -->
+
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/jquery.validate.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/sweetalert/sweetalert2.min.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/custom-alert.js"></script>
+    <script src="https://dtm.payable.lk/plugins/js/other/form-ele/form-validation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#search_time').change(function(dateText) {
+                console.log('form submit');
+                var dtime = $('#search_time').val();
+                if (validationDate(dtime)) {
+                    ddTable.draw();
+                } else {
+                    event.preventDefault();
+                }
+                event.preventDefault();
+            });
+            var ddTable = $('#table-home').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "searching": false,
+                "iDisplayLength": 5,
+                "bSort": false,
+                "bFilter": false,
+                "bLengthChange": true,
+                "lengthMenu": [5, 10, 20, 30],
+                "ajax": {
+                    data: function(d) {
+                        d.search_time = $('#search_time').val(),
+                            d._token = 'OaKeyaz9HVlW7QRqWXw1Pw5IDMKIGIdnhfsySJNt'
+                    },
+                    "type": "post",
+                    "url": "https://dtm.payable.lk/myTaskList",
+                    "jsonpCallback": 'jsonCallback',
+                    "dataType": "jsonp"
+                }
+            }).on('xhr.dt', function(e, settings, json, xhr) {
+                $('#totalHr').html(json.totalHr + ' Hrs');
+                $('#taskStatus').html(json.taskStatus);
+            });
+        });
+
+        function validationDate(frmdate) {
+            var time_err = document.getElementById('error_for_time');
+            time_err.innerHTML = "";
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            // var todayDate = mm + '/' + dd + '/' + yyyy;
+            var todayDate = yyyy + '-' + mm + '-' + dd;
+            if (frmdate !== "") {
+                if (Date.parse(frmdate) > Date.parse(todayDate)) {
+                    time_err.innerHTML = "The date can't be future date.";
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function updateTaskStatusWithDate(ev) {
+            ev.preventDefault();
+            var urlToRedirectStus = ev.currentTarget.getAttribute("href");
+            var categoryname = ev.currentTarget.getAttribute("data-category");
+            var is_reload_tbl = ev.currentTarget.getAttribute("data-tbl-id");
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day) + " " + now.getHours() + ":" +
+                now.getMinutes() + ":" +
+                now.getSeconds(); // 2023-02-26
+            var hours = now.getHours();
+            var minutes = ("0" + now.getMinutes()).slice(-2);
+            var seconds = ("0" + now.getSeconds()).slice(-2);
+            var period = hours < 12 ? 'AM' : 'PM';
+            hours = hours % 12 || 12; // Convert hours to 12-hour format
+            var timeNow = hours + ":" + minutes + ":" + seconds + " " + period;
+            console.log(timeNow);
+            // var timeNow = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            console.log(today);
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you really want to " + categoryname + "?",
+                timer: 30000,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "No",
+                confirmButtonText: "Yes",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Update Task Status",
+                        html: "<div>" +
+                            "<div style='text-align: left;'><label>Select Date <span class='redstar'>*</span></label></div>" +
+                            //id='datetimepicker'                        
+                            "<input type='text' id='task_time' value='" + today +
+                            "' class='datetimepicker-input swal2-input' name='task_time' maxlength='100' required />" +
+                            "</div><br>" + "<div>" +
+                            "<div style='text-align: left;'><label>Select Time <span class='redstar'>*</span></label></div>" +
+                            //id='datetimepicker'                        
+                            "<input type='text' id='task_time_only' value='" + timeNow +
+                            "' class='datetimepicker-input swal2-input' name='task_time_only' maxlength='100' required />" +
+                            "</div>",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        cancelButtonText: "Cancel",
+                        confirmButtonText: "Save",
+                        inputValue: 'input value',
+                        customClass: 'swal2-overflow',
+                        didOpen: () => {
+                            $('input[id="task_time"]').datetimepicker({
+                                format: 'Y-m-d',
+                                timepicker: false,
+                                maxDate: '0',
+                                scrollInput: false,
+                                value: new Date() // Set the value to current date
+                            });
+                            // $('input[id="task_time"]').flatpickr({
+                            //     // enableTime: true,
+                            //     dateFormat: "Y-m-d",
+                            //     maxDate: "today"
+                            //     // enableTime: true,
+                            //     // defaultTime: timeNow,
+                            //     // enableSeconds: true,
+                            //     // enableTime: true,
+                            //     // dateFormat: "Y-m-d H:i:s",
+                            //     // enableTime: true,
+                            //     // defaultTime: timeNow,
+                            //     // enableSeconds: true,
+                            // });
+                            $('input[id="task_time_only"]').timepicker({
+                                timeFormat: 'h:i A', // Set the time format in 12-hour format with AM/PM
+                                step: 1, // Set step size to 1 second
+                                showSeconds: true, // Show seconds
+                                changeTime: function(time) {
+                                    $('#dtime_only').val(
+                                    time); // Update input field with selected time
+                                }
+                            });
+                            var currentTime = new Date();
+                            $('#dtime_only').timepicker('setTime', currentTime);
+                            // $('input[id="task_time_only"]').flatpickr({
+                            //     enableTime: true,
+                            //     noCalendar: true,
+                            //     enableSeconds: true,
+                            //     defaultTime: timeNow,
+                            //     dateFormat: "H:i:S",
+                            //     onValueUpdate: function(selectedDates, dateStr, instance) {
+                            //         var input = instance._input;
+                            //         var timeStr = input.value.split(" ")[1];
+                            //         if (timeStr) {
+                            //             var timeParts = timeStr.split(":");
+                            //             if (timeParts.length === 3) {
+                            //                 timeParts[2] = ("0" + timeParts[2]).slice(-2);
+                            //                 var newTimeStr = timeParts.join(":");
+                            //                 input.value = input.value.split(" ")[0] + " " +
+                            //                     newTimeStr;
+                            //             }
+                            //         }
+                            //     }
+                            //     // enableTime: true,
+                            //     // enableTime: true,
+                            //     // enableTime: true,
+                            //     // defaultTime: timeNow,
+                            //     // enableSeconds: true,
+                            // });
+                        },
+                        preConfirm: () => {
+                            var task_time = $('input[id="task_time"]').val();
+                            var task_time_only = $('input[id="task_time_only"]').val();
+                            var today = new Date();
+                            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' +
+                                today
+                                .getDate();
+                            var time = today.getHours() + ":" + today.getMinutes() + ":" + today
+                                .getSeconds();
+                            var dateTime = date + ' ' + time;
+                            var userDateTime = $('#task_time').val() + ' ' + task_time_only;
+                            var userDateTimenew = new Date($('#task_time').val() + ' ' +
+                                task_time_only);
+                            var userDatenew = new Date($('#task_time').val());
+                            var userDatenewdate = userDatenew.getFullYear() + '-' + (userDatenew
+                                .getMonth() + 1) + '-' + userDatenew.getDate();
+                            var currentDateFinal = new Date(date);
+                            var selectedDateFinal = new Date(userDatenewdate);
+                            if (task_time === "") {
+                                Swal.showValidationMessage("Please select the date.");
+                            } else if (task_time_only === "") {
+                                Swal.showValidationMessage("Please select the time.");
+                            } else if (currentDateFinal < selectedDateFinal) {
+                                Swal.showValidationMessage("The date can't be future date.");
+                            } else if (today < userDateTimenew) {
+                                Swal.showValidationMessage("The time can't be a future time.");
+                            } else {
+                                return new Promise(function(resolve) {
+                                    if (result) {
+                                        resolve([
+                                            $('#task_time').val(),
+                                            $('#task_time_only').val()
+                                        ]);
+                                    }
+                                });
+                            }
+                        },
+                    }).then((data) => {
+                        if (data.value) {
+                            let dataValue = data.value;
+                            let dataArr1 = dataValue[0];
+                            let dataArr2 = dataValue[1];
+                            let update_req = {
+                                "task_time": dataArr1,
+                                "task_time_only": dataArr2
+                            }
+                            let myreq = btoa(JSON.stringify(update_req));
+                            console.log(urlToRedirectStus + "/" + myreq)
+                            $.ajax({
+                                type: "GET",
+                                url: urlToRedirectStus + "/" + myreq,
+                                dataType: "JSON",
+                                beforeSend: function() {
+                                    Swal.fire("Please wait");
+                                    Swal.showLoading();
+                                },
+                                success: function(results) {
+                                    if (results.success === true) {
+                                        Swal.fire(
+                                            results.header,
+                                            results.message,
+                                            results.type).then((result1) => {
+                                            if (result1.isConfirmed) {
+                                                var table = $(is_reload_tbl)
+                                                    .DataTable();
+                                                table.ajax.reload();
+                                            }
+                                        });
+                                        if (is_reload_tbl !== "") {
+                                            var table = $(is_reload_tbl).DataTable();
+                                            table.ajax.reload();
+                                        }
+                                    } else {
+                                        Swal.fire({
+                                            title: results.header,
+                                            text: results.message,
+                                            icon: results.type,
+                                            allowOutsideClick: false
+                                        }).then(function() {
+                                            location.reload();
+                                        });
+                                    }
+                                },
+                                error: function(xhr, textStatus, errorThrown) {
+                                    if (xhr.status === 500) {
+                                        Swal.fire({
+                                            title: 'Session Expired',
+                                            text: 'Session Timeout! Please login again!',
+                                            icon: 'warning',
+                                            allowOutsideClick: false
+                                        }).then(function() {
+                                            location.reload();
+                                        });
+                                    }
+                                },
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

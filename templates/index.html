@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTM Task Manager</title>
+    
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css' rel='stylesheet' />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Time Picker Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-tasks logo-icon"></i>
+                    <h1>DTM Task Manager</h1>
+                    <p>Modern Task Monitoring System</p>
+                </div>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </label>
+                        <input type="email" id="username" name="username" 
+                               placeholder="your.email@payable.lk" required
+                               value="nithila@payable.lk">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <input type="password" id="password" name="password" 
+                               placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                    
+                    <div id="loginError" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="appScreen" class="screen">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <!-- Left Section: Branding -->
+                <div class="header-left">
+                    <div class="brand-container">
+                        <div class="brand-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="brand-text">
+                            <h1 class="brand-title">DTM</h1>
+                            <span class="brand-subtitle">Task Manager</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Section: Navigation & Actions -->
+                <div class="header-center">
+                    <nav class="nav-tabs">
+                        <button id="btnCalendarView" class="nav-tab active">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Calendar</span>
+                        </button>
+                        <button id="btnOngoingView" class="nav-tab">
+                            <i class="fas fa-clock"></i>
+                            <span>Ongoing Tasks</span>
+                        </button>
+                        <div class="nav-tab-indicator"></div>
+                    </nav>
+                </div>
+
+                <!-- Right Section: User & Actions -->
+                <div class="header-right">
+                    <button id="btnStartTask" class="btn-start-task">
+                        <i class="fas fa-plus"></i>
+                        <span>Start Task</span>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span id="userEmail" class="user-email"></span>
+                        </div>
+                        <button id="btnLogout" class="btn-logout" title="Logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Calendar View -->
+            <div id="calendarView" class="main-view active">
+                <div class="calendar-container">
+                    <div id="calendar"></div>
+
+                    <!-- Calendar Legend -->
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-color today-indicator"></div>
+                            <span>Today</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color selected-indicator"></div>
+                            <span>Selected Date</span>
+                        </div>
+                        <div class="legend-item">
+                            <i class="fas fa-plus legend-icon"></i>
+                            <span>Click + to start task | Click date to view tasks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ongoing Tasks View -->
+            <div id="ongoingView" class="main-view">
+                <div class="ongoing-container">
+                    <div class="ongoing-header">
+                        <h2>
+                            <i class="fas fa-clock"></i>
+                            Ongoing Tasks
+                        </h2>
+                        <button id="btnRefreshOngoing" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    
+                    <div id="ongoingTasksList" class="ongoing-tasks-list">
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-check"></i>
+                            <p>No ongoing tasks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task List Sidebar -->
+            <div class="task-sidebar">
+                <div class="sidebar-header">
+                    <h2>Tasks</h2>
+                    <span class="task-count" id="taskCount">0 tasks</span>
+                </div>
+                
+                <div class="date-picker-container">
+                    <label for="taskDate">
+                        <i class="fas fa-calendar"></i>
+                        Select Date
+                    </label>
+                    <input type="date" id="taskDate" class="date-input">
+                </div>
+                
+                <div class="task-list" id="taskList">
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No tasks for this date</p>
+                    </div>
+                </div>
+                
+                <div class="stats-card">
+                    <h3>Summary</h3>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <div class="stat-label">Total Hours</div>
+                            <div class="stat-value" id="totalHours">0:00</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-tasks"></i>
+                        <div>
+                            <div class="stat-label">Tasks</div>
+                            <div class="stat-value" id="completedCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-circle"></i>
+                        <div>
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value-small" id="currentStatus">No active task</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Start Task Modal -->
+    <div id="startTaskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-plus-circle"></i>
+                    Start New Task
+                </h2>
+                <button class="modal-close" onclick="closeStartTaskModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="startTaskForm" class="task-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskType">
+                            <i class="fas fa-tag"></i>
+                            Task Type *
+                        </label>
+                        <select id="taskType" name="taskType" required>
+                            <option value="">Select task type...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project">
+                            <i class="fas fa-project-diagram"></i>
+                            Project *
+                        </label>
+                        <select id="project" name="project" required>
+                            <option value="">Select project...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category">
+                            <i class="fas fa-folder"></i>
+                            Category
+                        </label>
+                        <select id="category" name="category">
+                            <option value="">Select category...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="activity">
+                            <i class="fas fa-list-check"></i>
+                            Activity
+                        </label>
+                        <select id="activity" name="activity">
+                            <option value="">Select activity...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">
+                        <i class="fas fa-align-left"></i>
+                        Task Description *
+                    </label>
+                    <textarea id="description" name="description" rows="4" 
+                              placeholder="Describe what you're working on..." required></textarea>
+                </div>
+                
+                <div class="form-group" id="bugIdGroup" style="display: none;">
+                    <label for="bugId">
+                        <i class="fas fa-bug"></i>
+                        Bug ID(s)
+                    </label>
+                    <input type="text" id="bugId" name="bugId"
+                           placeholder="e.g., 1234, 1235, 1236">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">
+                            <i class="fas fa-calendar"></i>
+                            Start Date *
+                        </label>
+                        <input type="text" id="startDate" name="startDate" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startTime">
+                            <i class="fas fa-clock"></i>
+                            Start Time *
+                        </label>
+                        <input type="text" id="startTime" name="startTime" required readonly>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeStartTaskModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-play"></i>
+                        Start Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- End Task Modal -->
+    <div id="endTaskModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-stop-circle"></i>
+                    End Task
+                </h2>
+                <button class="modal-close" onclick="closeEndTaskModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="endTaskForm" class="task-form">
+                <div class="task-end-info">
+                    <p>Select the end date and time for this task:</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="endDate">
+                            <i class="fas fa-calendar"></i>
+                            End Date *
+                        </label>
+                        <input type="text" id="endDate" name="endDate" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endTime">
+                            <i class="fas fa-clock"></i>
+                            End Time *
+                        </label>
+                        <input type="text" id="endTime" name="endTime" required readonly>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeEndTaskModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-stop"></i>
+                        End Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- FullCalendar JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+    <!-- jQuery (required for time pickers) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Time Picker Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+
