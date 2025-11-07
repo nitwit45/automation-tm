@@ -5,8 +5,9 @@ name = "pypi"
 
 [packages]
 requests = ">=2.31.0"
+flask = ">=3.0.0"
 
 [dev-packages]
 
 [requires]
-python_version = "3.12"
+python_version = "3.11"
