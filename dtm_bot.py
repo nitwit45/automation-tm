@@ -39,6 +39,51 @@ class DTMBot:
         except Exception as e:
             print(f"  ⚠ Error refreshing CSRF token: {e}")
 
+    def is_session_valid(self) -> bool:
+        """Check if the current DTM session is still valid"""
+        try:
+            # Try to access the home page
+            response = self.session.get(f"{self.base_url}/home", allow_redirects=True)
+
+            print(f"  Session check: status={response.status_code}, url={response.url}")
+
+            # Check for success indicators (same as login method)
+            if response.status_code == 200:
+                response_text = response.text.lower()
+                has_logout = 'logout' in response_text
+                is_home_url = '/home' in response.url
+                has_login_form = 'login' in response_text and ('form' in response_text or 'password' in response_text)
+
+                print(f"  Session check details: logout={has_logout}, home_url={is_home_url}, login_form={has_login_form}")
+
+                # Valid session indicators: logout link present, or we're on home page
+                if has_logout or is_home_url:
+                    print("  ✓ Session is valid")
+                    return True
+
+                # If we see login form elements but no logout, session is invalid
+                if has_login_form:
+                    print("  ✗ Session is invalid (login form detected)")
+                    return False
+
+            # If we get redirected to login page, session is invalid
+            if response.status_code in [301, 302, 303] and 'login' in response.headers.get('Location', '').lower():
+                print("  ✗ Session is invalid (redirect to login)")
+                return False
+
+            # If final URL contains login, session is invalid
+            if 'login' in response.url.lower():
+                print("  ✗ Session is invalid (final URL contains login)")
+                return False
+
+            # Default to invalid if we can't determine
+            print("  ✗ Session validation inconclusive, defaulting to invalid")
+            return False
+
+        except Exception as e:
+            print(f"  ⚠ Error checking session validity: {e}")
+            return False
+
     def login(self, username: str, password: str) -> bool:
         """Login to the DTM system"""
         try:
@@ -407,18 +452,19 @@ class DTMBot:
         
         Args:
             task_id: ID of the task to end
-            end_datetime: Optional end datetime (defaults to now)
+            end_datetime: Optional end datetime in format "YYYY-MM-DD HH:MM AM/PM" (defaults to now)
         """
         try:
             # Get current datetime if not provided
             if not end_datetime:
                 now = datetime.now()
                 task_time = now.strftime('%Y-%m-%d')
-                task_time_only = now.strftime('%I:%M:%S %p')
+                task_time_only = now.strftime('%I:%M %p')
             else:
-                dt = datetime.fromisoformat(end_datetime)
+                # Parse datetime string in format "YYYY-MM-DD HH:MM AM/PM"
+                dt = datetime.strptime(end_datetime, '%Y-%m-%d %I:%M %p')
                 task_time = dt.strftime('%Y-%m-%d')
-                task_time_only = dt.strftime('%I:%M:%S %p')
+                task_time_only = dt.strftime('%I:%M %p')
             
             # Prepare the update request
             update_req = {
@@ -458,18 +504,19 @@ class DTMBot:
         
         Args:
             task_id: ID of the task to pause
-            pause_datetime: Optional pause datetime (defaults to now)
+            pause_datetime: Optional pause datetime in format "YYYY-MM-DD HH:MM AM/PM" (defaults to now)
         """
         try:
             # Get current datetime if not provided
             if not pause_datetime:
                 now = datetime.now()
                 task_time = now.strftime('%Y-%m-%d')
-                task_time_only = now.strftime('%I:%M:%S %p')
+                task_time_only = now.strftime('%I:%M %p')
             else:
-                dt = datetime.fromisoformat(pause_datetime)
+                # Parse datetime string in format "YYYY-MM-DD HH:MM AM/PM"
+                dt = datetime.strptime(pause_datetime, '%Y-%m-%d %I:%M %p')
                 task_time = dt.strftime('%Y-%m-%d')
-                task_time_only = dt.strftime('%I:%M:%S %p')
+                task_time_only = dt.strftime('%I:%M %p')
             
             # Prepare the update request
             update_req = {
@@ -502,6 +549,71 @@ class DTMBot:
         except Exception as e:
             print(f"✗ Error pausing task: {e}")
             return False
+    
+    def resume_task(self, task_id: str, resume_datetime: Optional[str] = None) -> bool:
+        """
+        Resume a paused task
+        
+        Args:
+            task_id: ID of the task to resume
+            resume_datetime: Optional resume datetime in format "YYYY-MM-DD HH:MM AM/PM" (defaults to now)
+        """
+        try:
+            # Get current datetime if not provided
+            if not resume_datetime:
+                now = datetime.now()
+                task_time = now.strftime('%Y-%m-%d')
+                task_time_only = now.strftime('%I:%M %p')
+            else:
+                # Parse datetime string in format "YYYY-MM-DD HH:MM AM/PM"
+                dt = datetime.strptime(resume_datetime, '%Y-%m-%d %I:%M %p')
+                task_time = dt.strftime('%Y-%m-%d')
+                task_time_only = dt.strftime('%I:%M %p')
+            
+            # Prepare the update request
+            update_req = {
+                "task_time": task_time,
+                "task_time_only": task_time_only
+            }
+            
+            # Encode the request
+            import base64
+            myreq = base64.b64encode(json.dumps(update_req).encode()).decode()
+            
+            # Resume the task (status 2 = continue/resume)
+            url = f"{self.base_url}/task/updatetask/2/{task_id}/{myreq}"
+            print(f"  Resuming task with URL: {url}")
+            print(f"  Task ID: {task_id}")
+            print(f"  Resume time: {task_time} {task_time_only}")
+            
+            response = self.session.get(url)
+            
+            print(f"  Response status: {response.status_code}")
+            print(f"  Response URL: {response.url}")
+            
+            if response.status_code == 200:
+                try:
+                    result = response.json()
+                    print(f"  Response body: {result}")
+                    if result.get('success'):
+                        print("✓ Task resumed successfully!")
+                        print(f"  Resumed at: {task_time} {task_time_only}")
+                        return True
+                    else:
+                        print(f"✗ Failed to resume task: {result.get('message')}")
+                        return False
+                except Exception as e:
+                    print(f"✗ Failed to parse response: {e}")
+                    print(f"  Response text: {response.text[:500]}")
+                    return False
+            else:
+                print(f"✗ Failed to resume task. Status code: {response.status_code}")
+                print(f"  Response text: {response.text[:500]}")
+                return False
+                
+        except Exception as e:
+            print(f"✗ Error resuming task: {e}")
+            return False
 
 
 def print_banner():
@@ -529,6 +641,7 @@ def main():
     print("  - bot.start_task(...)")
     print("  - bot.end_task(task_id)")
     print("  - bot.pause_task(task_id)")
+    print("  - bot.resume_task(task_id)")
     print("\nFor interactive mode, use: python -i dtm_bot.py")
     
     return bot

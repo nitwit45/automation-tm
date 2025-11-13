@@ -98,6 +98,11 @@
 
                 <!-- Right Section: User & Actions -->
                 <div class="header-right">
+                    <button id="btnBulkUpload" class="btn-bulk-upload" title="Bulk Upload Tasks">
+                        <i class="fas fa-file-upload"></i>
+                        <span>Bulk Upload</span>
+                    </button>
+                    
                     <button id="btnStartTask" class="btn-start-task">
                         <i class="fas fa-plus"></i>
                         <span>Start Task</span>
@@ -306,11 +311,15 @@
                             <i class="fas fa-clock"></i>
                             Start Time *
                         </label>
-                        <input type="text" id="startTime" name="startTime" required readonly>
+                        <input type="text" id="startTime" name="startTime" required>
                     </div>
                 </div>
 
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="clearLastTaskValues()" title="Clear saved form values">
+                        <i class="fas fa-eraser"></i>
+                        Clear Saved
+                    </button>
                     <button type="button" class="btn btn-secondary" onclick="closeStartTaskModal()">
                         Cancel
                     </button>
@@ -355,7 +364,7 @@
                             <i class="fas fa-clock"></i>
                             End Time *
                         </label>
-                        <input type="text" id="endTime" name="endTime" required readonly>
+                        <input type="text" id="endTime" name="endTime" required>
                     </div>
                 </div>
                 
@@ -369,6 +378,192 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Pause Task Modal -->
+    <div id="pauseTaskModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-pause-circle"></i>
+                    Pause Task
+                </h2>
+                <button class="modal-close" onclick="closePauseTaskModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="pauseTaskForm" class="task-form">
+                <div class="task-end-info">
+                    <p>Select the pause date and time for this task:</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pauseDate">
+                            <i class="fas fa-calendar"></i>
+                            Pause Date *
+                        </label>
+                        <input type="text" id="pauseDate" name="pauseDate" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pauseTime">
+                            <i class="fas fa-clock"></i>
+                            Pause Time *
+                        </label>
+                        <input type="text" id="pauseTime" name="pauseTime" required>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePauseTaskModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-pause"></i>
+                        Pause Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resume Task Modal -->
+    <div id="resumeTaskModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-play-circle"></i>
+                    Resume Task
+                </h2>
+                <button class="modal-close" onclick="closeResumeTaskModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="resumeTaskForm" class="task-form">
+                <div class="task-end-info">
+                    <p>Select the resume date and time for this task:</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="resumeDate">
+                            <i class="fas fa-calendar"></i>
+                            Resume Date *
+                        </label>
+                        <input type="text" id="resumeDate" name="resumeDate" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resumeTime">
+                            <i class="fas fa-clock"></i>
+                            Resume Time *
+                        </label>
+                        <input type="text" id="resumeTime" name="resumeTime" required>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeResumeTaskModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-play"></i>
+                        Resume Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bulk Upload Modal -->
+    <div id="bulkUploadModal" class="modal">
+        <div class="modal-content modal-medium">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-file-upload"></i>
+                    Bulk Upload Tasks
+                </h2>
+                <button class="modal-close" onclick="closeBulkUploadModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="bulk-upload-content">
+                <div class="bulk-upload-instructions">
+                    <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+                    <ol>
+                        <li>Download the CSV template using the button below</li>
+                        <li>Fill in the template with your tasks (one task per row)</li>
+                        <li>Required columns: task_type, project, description, start_date, start_time, end_time</li>
+                        <li>Optional columns: category, activity</li>
+                        <li>Date format: YYYY-MM-DD (e.g., 2025-11-13)</li>
+                        <li>Time format: HH:MM or HH:MM:SS (e.g., 09:00 or 09:00:00)</li>
+                        <li>Upload the completed CSV file</li>
+                    </ol>
+                    
+                    <button type="button" class="btn btn-secondary" id="btnDownloadTemplate">
+                        <i class="fas fa-download"></i>
+                        Download CSV Template
+                    </button>
+                </div>
+                
+                <div class="bulk-upload-form">
+                    <form id="bulkUploadForm">
+                        <div class="form-group">
+                            <label for="csvFile">
+                                <i class="fas fa-file-csv"></i>
+                                Select CSV File *
+                            </label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="csvFile" name="csvFile" accept=".csv" required>
+                                <div class="file-input-display">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span id="fileName">Choose a CSV file or drag it here</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="uploadProgress" class="upload-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div id="progressBarFill" class="progress-bar-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="progressMessage">Processing tasks...</span>
+                                <span id="progressCount">0 / 0</span>
+                            </div>
+                        </div>
+                        
+                        <div id="uploadResults" class="upload-results" style="display: none;">
+                            <h3><i class="fas fa-check-circle"></i> Upload Results</h3>
+                            <div class="results-summary">
+                                <div class="result-stat success">
+                                    <i class="fas fa-check"></i>
+                                    <span id="successCount">0</span> Successful
+                                </div>
+                                <div class="result-stat failed">
+                                    <i class="fas fa-times"></i>
+                                    <span id="failedCount">0</span> Failed
+                                </div>
+                            </div>
+                            <div id="resultsDetails" class="results-details"></div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="closeBulkUploadModal()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="btnUploadCSV">
+                                <i class="fas fa-upload"></i>
+                                Upload Tasks
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

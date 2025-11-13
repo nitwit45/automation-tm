@@ -41,10 +41,19 @@ For production use, the app runs as a systemd service:
 ## Features
 
 - **Task Management**: Start, pause, and end tasks
+- **Bulk Upload**: Upload multiple tasks via CSV file
 - **Calendar View**: Visual task tracking
 - **Secure Login**: Session-based authentication
 - **Real-time Updates**: Live task status
 - **Mobile Friendly**: Works on desktop and mobile
+
+### Bulk Upload Feature
+Upload multiple tasks at once using a CSV file. Perfect for:
+- Adding historical tasks
+- Planning tasks for multiple days
+- Importing tasks from other systems
+
+See [BULK_UPLOAD_GUIDE.md](BULK_UPLOAD_GUIDE.md) for detailed instructions.
 
 ## API Endpoints
 
@@ -53,6 +62,8 @@ For production use, the app runs as a systemd service:
 - `POST /api/tasks/start` - Start new task
 - `POST /api/tasks/end/<task_id>` - End task
 - `GET /api/tasks` - Get tasks for date
+- `GET /api/tasks/csv-template` - Download CSV template for bulk upload
+- `POST /api/tasks/bulk-upload` - Upload multiple tasks via CSV file
 
 ## Production URL
 
